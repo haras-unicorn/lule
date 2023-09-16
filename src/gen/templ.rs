@@ -1,6 +1,7 @@
 use crate::fun::text;
 use crate::scheme::*;
 use anyhow::Result;
+use std::collections::BTreeMap;
 use std::path::PathBuf;
 use templar;
 use templar::*;
@@ -16,27 +17,34 @@ fn generate_template(original: PathBuf, replaced: PathBuf, scheme: &Scheme) -> R
     // };
 
     let template = templar::Templar::global().parse(&content)?;
-    let mut data: templar::Document = templar::Document::default();
+    let mut data = BTreeMap::new();
+    // let mut data: templar::Document = templar::Document::default();
     if let Some(colors) = scheme.colors() {
         for (i, color) in colors.iter().enumerate() {
             let name = "color".to_string() + &i.to_string();
-            data[name] = color.to_rgb_hex_string(false).into();
+            data.insert(name.into(), color.to_rgb_hex_string(false).into());
         }
-        data["background"] = colors[0].to_rgb_hex_string(false).into();
-        data["foreground"] = colors[15].to_rgb_hex_string(false).into();
-        data["cursor"] = colors[1].to_rgb_hex_string(false).into();
-        data["accent"] = colors[1].to_rgb_hex_string(false).into();
+        data.insert(
+            "background".into(),
+            colors[0].to_rgb_hex_string(false).into(),
+        );
+        data.insert(
+            "foreground".into(),
+            colors[15].to_rgb_hex_string(false).into(),
+        );
+        data.insert("cursor".into(), colors[1].to_rgb_hex_string(false).into());
+        data.insert("accent".into(), colors[1].to_rgb_hex_string(false).into());
     }
 
     if let Some(wallpaper) = scheme.image() {
-        data["wallpaper"] = wallpaper.into();
+        data.insert("wallpaper".into(), wallpaper.into());
     }
     if let Some(theme) = scheme.theme() {
-        data["theme"] = theme.into();
+        data.insert("theme".into(), theme.into());
     }
 
     let context = templar::StandardContext::new();
-    context.set(data)?;
+    context.set(templar::InnerData::Map(data))?;
 
     let new_content = (template.render(&context)?).to_string();
     text::write_to_file(replaced, new_content.as_bytes());

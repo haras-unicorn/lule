@@ -8,7 +8,7 @@ use clap::{
     crate_description, crate_name, crate_version, App, AppSettings, Arg, ArgSettings, SubCommand,
 };
 
-pub fn build_cli<'a>(logo: &'a str) -> App<'static, 'a> {
+pub fn build_cli(logo: &str) -> App<'static, '_> {
     App::new(crate_name!())
         .version(crate_version!())
         // NOTE: this doesn't seem right but can't make the flower not clipped otherwise
