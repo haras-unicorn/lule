@@ -5,7 +5,6 @@ mod scheme;
 mod show;
 mod var;
 
-extern crate file;
 extern crate rayon;
 extern crate serde;
 extern crate serde_json;
