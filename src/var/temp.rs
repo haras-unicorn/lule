@@ -1,10 +1,10 @@
-use crate::fun::text;
+use crate::fun;
 use crate::scheme::*;
 use anyhow::{Context, Result};
 
 pub fn concatinate(scheme: &mut Scheme) {
-    let lule_scheme = text::pather(vec!["lule_scheme"], std::env::temp_dir());
-    if let Ok(scheme_string) = text::file_to_string(lule_scheme) {
+    let lule_scheme = fun::pather(vec!["lule_scheme"], std::env::temp_dir());
+    if let Ok(scheme_string) = std::fs::read_to_string(lule_scheme) {
         if let Ok(sh) = make_scheme(scheme_string) {
             *scheme = sh;
         }

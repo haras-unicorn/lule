@@ -1,7 +1,7 @@
 use colored::*;
 use std::path::PathBuf;
 
-use crate::fun::text;
+use crate::fun;
 use crate::gen::kmeans;
 
 use super::hex::color_from_hex;
@@ -28,7 +28,7 @@ pub fn colors_from_file(
     filename: PathBuf,
 ) -> Result<Vec<pastel::Color>, Box<dyn std::error::Error>> {
     let mut colors = Vec::new();
-    for line in text::lines_to_vec(filename) {
+    for line in fun::lines_to_vec(filename) {
         colors.push(color_from_hex(&line));
     }
     Ok(colors)

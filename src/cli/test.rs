@@ -2,7 +2,7 @@ use crate::gen::hex::color_from_hex;
 use crate::scheme::*;
 use anyhow::Result;
 
-use crate::fun::text;
+use crate::fun;
 use crate::gen::generate;
 use crate::gen::palette;
 use crate::gen::template;
@@ -29,7 +29,7 @@ fn test_colors(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
 
     let wallpaper = scheme.walldir().clone().unwrap();
     if scheme.image().is_none() {
-        scheme.set_image(Some(text::random_image(&wallpaper)));
+        scheme.set_image(Some(fun::random_image(&wallpaper)));
     }
 
     let palette = palette::palette_from_image(scheme.image().clone().unwrap());

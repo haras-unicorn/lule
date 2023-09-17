@@ -1,4 +1,4 @@
-use crate::fun::text;
+use crate::fun;
 use crate::scheme::*;
 use serde_json::Value;
 use std::collections::HashMap as Map;
@@ -13,17 +13,17 @@ pub fn write_temp(scheme: &Scheme) {
         for color in colors.iter() {
             record.push(color.to_rgb_hex_string(true).to_string());
         }
-        text::write_temp_file("lule_colors", record.join("\n").as_bytes());
+        fun::write_temp_file("lule_colors", record.join("\n").as_bytes());
     }
     if let Some(wallpaper) = scheme.image() {
-        text::write_temp_file("lule_wallpaper", wallpaper.as_bytes());
+        fun::write_temp_file("lule_wallpaper", wallpaper.as_bytes());
     }
     if let Some(theme) = scheme.theme() {
-        text::write_temp_file("lule_theme", theme.as_bytes());
+        fun::write_temp_file("lule_theme", theme.as_bytes());
     }
     let scheme_json = serde_json::to_value(scheme).unwrap();
     let format_scheme = format!("{}", scheme_json);
-    text::write_temp_file("lule_scheme", format_scheme.as_bytes());
+    fun::write_temp_file("lule_scheme", format_scheme.as_bytes());
 }
 
 pub fn write_cache(scheme: &Scheme) {
@@ -32,21 +32,21 @@ pub fn write_cache(scheme: &Scheme) {
         None => "",
     };
 
-    let lule_colors = text::pather(vec!["lule_colors"], env::temp_dir());
-    let colors = text::pather(vec!["colors"], PathBuf::from(cache_path));
-    text::copy_to(lule_colors, colors);
+    let lule_colors = fun::pather(vec!["lule_colors"], env::temp_dir());
+    let colors = fun::pather(vec!["colors"], PathBuf::from(cache_path));
+    fun::copy_to(lule_colors, colors);
 
-    let lule_wallpaper = text::pather(vec!["lule_wallpaper"], env::temp_dir());
-    let wallpaper = text::pather(vec!["wallpaper"], PathBuf::from(cache_path));
-    text::copy_to(lule_wallpaper, wallpaper);
+    let lule_wallpaper = fun::pather(vec!["lule_wallpaper"], env::temp_dir());
+    let wallpaper = fun::pather(vec!["wallpaper"], PathBuf::from(cache_path));
+    fun::copy_to(lule_wallpaper, wallpaper);
 
-    let lule_theme = text::pather(vec!["lule_theme"], env::temp_dir());
-    let theme = text::pather(vec!["theme"], PathBuf::from(cache_path));
-    text::copy_to(lule_theme, theme);
+    let lule_theme = fun::pather(vec!["lule_theme"], env::temp_dir());
+    let theme = fun::pather(vec!["theme"], PathBuf::from(cache_path));
+    fun::copy_to(lule_theme, theme);
 
-    let lule_palette = text::pather(vec!["lule_palette"], env::temp_dir());
-    let theme = text::pather(vec!["palette"], PathBuf::from(cache_path));
-    text::copy_to(lule_palette, theme);
+    let lule_palette = fun::pather(vec!["lule_palette"], env::temp_dir());
+    let theme = fun::pather(vec!["palette"], PathBuf::from(cache_path));
+    fun::copy_to(lule_palette, theme);
 }
 
 pub fn write_cache_json(scheme: &mut Scheme, values: Value) {
@@ -54,9 +54,9 @@ pub fn write_cache_json(scheme: &mut Scheme, values: Value) {
         Some(value) => value,
         None => "",
     };
-    let cache_json = text::pather(vec!["colors.json"], PathBuf::from(cache_path));
+    let cache_json = fun::pather(vec!["colors.json"], PathBuf::from(cache_path));
     let json_out = serde_json::to_string_pretty(&values).unwrap();
-    text::write_to_file(cache_json, json_out.as_bytes());
+    std::fs::write(cache_json, json_out.as_bytes()).unwrap();
 }
 
 pub fn output_to_json(scheme: &mut Scheme, map: bool) -> Value {

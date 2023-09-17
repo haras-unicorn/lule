@@ -39,7 +39,6 @@ fn main() {
         match subcommand {
             "colors" => cli::colors::run(&app, &mut scheme),
             "create" => cli::create::run(&app, &mut scheme),
-            "config" => cli::config::run(&app, &mut scheme),
             "test" => cli::test::run(&app, &mut scheme),
             _ => Ok(()),
         }

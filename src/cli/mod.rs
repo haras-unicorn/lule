@@ -1,5 +1,4 @@
 pub mod colors;
-pub mod config;
 pub mod create;
 pub mod test;
 
@@ -134,21 +133,6 @@ pub fn build_cli(logo: &str) -> App<'static, '_> {
                         .required(true)
                         .takes_value(true)
                         .last(true),
-                ),
-        )
-        .subcommand(
-            SubCommand::with_name("config")
-                .about("Send specific configs to pipe or daemon")
-                .arg(
-                    Arg::with_name("theme")
-                        .help("specify the theme to extract from colors")
-                        .long("theme")
-                        .takes_value(true)
-                        .value_name("THEME")
-                        .possible_values(&["dark", "light"])
-                        .default_value("dark")
-                        .required(true)
-                        .set(ArgSettings::RequireEquals),
                 ),
         )
         .subcommand(

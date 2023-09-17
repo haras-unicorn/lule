@@ -1,4 +1,4 @@
-use crate::fun::text;
+use crate::fun;
 use crate::scheme::*;
 use clap;
 
@@ -30,9 +30,9 @@ pub fn concatinate(app: &clap::ArgMatches, scheme: &mut Scheme) {
 
     if let Some(sub) = app.subcommand_matches("create") {
         if let Some(arg) = sub.value_of("image") {
-            scheme.set_image(Some(text::vaid_image(arg)));
+            scheme.set_image(Some(fun::vaid_image(arg)));
         } else if let Some(arg) = sub.value_of("wallpath") {
-            scheme.set_image(Some(text::random_image(arg)));
+            scheme.set_image(Some(fun::random_image(arg)));
         }
         if let Some(arg) = sub.value_of("theme") {
             scheme.set_theme(Some(arg.to_string()));
@@ -53,7 +53,7 @@ pub fn concatinate(app: &clap::ArgMatches, scheme: &mut Scheme) {
     };
     if let Some(sub) = app.subcommand_matches("test") {
         if let Some(arg) = sub.value_of("image") {
-            scheme.set_image(Some(text::vaid_image(arg)));
+            scheme.set_image(Some(fun::vaid_image(arg)));
         }
         if let Some(arg) = sub.value_of("theme") {
             scheme.set_theme(Some(arg.to_string()));

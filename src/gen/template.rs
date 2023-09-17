@@ -1,4 +1,3 @@
-use crate::fun::text;
 use crate::scheme::*;
 use anyhow::Result;
 use std::collections::BTreeMap;
@@ -8,7 +7,7 @@ use templar::*;
 
 fn generate_template(original: PathBuf, replaced: PathBuf, scheme: &Scheme) -> Result<()> {
     let mut content = String::new();
-    if let Ok(cont) = text::file_to_string(original) {
+    if let Ok(cont) = std::fs::read_to_string(original) {
         content = cont;
     }
 
@@ -47,7 +46,7 @@ fn generate_template(original: PathBuf, replaced: PathBuf, scheme: &Scheme) -> R
     context.set(templar::InnerData::Map(data))?;
 
     let new_content = (template.render(&context)?).to_string();
-    text::write_to_file(replaced, new_content.as_bytes());
+    std::fs::write(replaced, new_content.as_bytes()).unwrap();
     Ok(())
 }
 

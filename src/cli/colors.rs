@@ -1,4 +1,3 @@
-use crate::fun::text;
 use crate::gen::apply;
 use crate::gen::palette;
 use crate::scheme::*;
@@ -26,13 +25,13 @@ pub fn run(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
 
         let mut wall_temp = PathBuf::from(&cachepath);
         wall_temp.push("wallpaper");
-        if let Ok(content) = text::file_to_string(wall_temp) {
+        if let Ok(content) = std::fs::read_to_string(wall_temp) {
             scheme.set_image(Some(content));
         }
 
         let mut theme_temp = PathBuf::from(&cachepath);
         theme_temp.push("theme");
-        if let Ok(content) = text::file_to_string(theme_temp) {
+        if let Ok(content) = std::fs::read_to_string(theme_temp) {
             scheme.set_theme(Some(content));
         }
     }
