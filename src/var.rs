@@ -1,6 +1,6 @@
 pub mod args;
 pub mod defs;
-pub mod envi;
+pub mod env;
 pub mod file;
 pub mod pipe;
 pub mod temp;
@@ -11,7 +11,7 @@ use colored::*;
 pub fn concatinate(app: &clap::ArgMatches, scheme: &mut Scheme) {
     temp::concatinate(scheme);
     defs::concatinate(scheme);
-    envi::concatinate(scheme);
+    env::concatinate(scheme);
     args::concatinate(app, scheme);
     pipe::concatinate(scheme);
 

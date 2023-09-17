@@ -3,7 +3,7 @@ use crate::gen::apply;
 use crate::gen::palette;
 use crate::scheme::*;
 use crate::show::format;
-use crate::show::viuwer;
+use crate::show::viewer;
 use crate::var;
 use anyhow::Result;
 use std::path::PathBuf;
@@ -45,13 +45,13 @@ pub fn run(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
                 println!("{}", color.to_rgb_hex_string(true));
             }
         } else if arg == "image" {
-            viuwer::display_image(scheme, (cols).into(), (rows - 1).into()).ok();
+            viewer::display_image(scheme, (cols).into(), (rows - 1).into()).ok();
         } else if arg == "ansii" {
             format::show_colors(scheme, 0..256, 4);
         } else if arg == "list" {
             format::show_pastel_colors(scheme, 0..256);
         } else if arg == "mix" {
-            viuwer::display_image(scheme, (cols).into(), (rows - 3).into()).ok();
+            viewer::display_image(scheme, (cols).into(), (rows - 3).into()).ok();
             println!(
                 "Wallpaper: {}, \t\t Colors: 1-16",
                 scheme.image().clone().unwrap()

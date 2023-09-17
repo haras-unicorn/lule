@@ -1,3 +1,3 @@
 pub mod canvas;
 pub mod format;
-pub mod viuwer;
+pub mod viewer;

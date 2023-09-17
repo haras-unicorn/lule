@@ -5,15 +5,15 @@ use anyhow::Result;
 use crate::fun::text;
 use crate::gen::generate;
 use crate::gen::palette;
-use crate::gen::templ;
+use crate::gen::template;
 use crate::show::format;
-use crate::show::viuwer;
+use crate::show::viewer;
 use crate::var;
 
 pub fn run(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
     test_colors(app, scheme)?;
 
-    templ::pattern_gneration(scheme)?;
+    template::pattern_gneration(scheme)?;
 
     Ok(())
 }
@@ -23,7 +23,7 @@ fn test_colors(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
     // pipe_name.push("lule_pipe");
 
     var::defs::concatinate(scheme);
-    var::envi::concatinate(scheme);
+    var::env::concatinate(scheme);
     var::args::concatinate(app, scheme);
     var::pipe::concatinate(scheme);
 
@@ -39,7 +39,7 @@ fn test_colors(app: &clap::ArgMatches, scheme: &mut Scheme) -> Result<()> {
     scheme.set_colors(Some(allcolors));
 
     let (cols, rows) = crossterm::terminal::size().ok().unwrap();
-    viuwer::display_image(scheme, (cols - 10).into(), (rows - 13).into()).ok();
+    viewer::display_image(scheme, (cols - 10).into(), (rows - 13).into()).ok();
     println!("Palette");
     let colors: Vec<pastel::Color> = palette.into_iter().map(|x| color_from_hex(&x)).collect();
     format::show_specified_colors(colors.clone(), ((cols - 56) / 16).into());

@@ -55,7 +55,7 @@ impl Scheme {
             mixes: None,
         }
     }
-    pub fn modi(&mut self, new: &Scheme) -> &Self {
+    pub fn modify(&mut self, new: &Scheme) -> &Self {
         if let Some(value) = new.colors() {
             self.colors = Some(value.clone());
         }

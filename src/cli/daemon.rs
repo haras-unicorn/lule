@@ -71,7 +71,7 @@ fn deamoned(scheme: &mut Scheme) -> Result<()> {
         'inner: loop {
             if let Ok(content) = piperx.try_recv() {
                 if let Ok(profile) = write::json_to_scheme(content.clone()) {
-                    scheme.modi(&profile.clone());
+                    scheme.modify(&profile.clone());
                     println!("{}", scheme.theme().clone().unwrap());
                     apply::write_colors(scheme, false)?;
                     break 'inner;

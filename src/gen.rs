@@ -4,5 +4,5 @@ pub mod generate;
 pub mod hex;
 pub mod kmeans;
 pub mod palette;
-pub mod templ;
+pub mod template;
 pub mod write;
