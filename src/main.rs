@@ -9,15 +9,15 @@
 //   // reason = "We have to handle errors properly"
 // )]
 
-use scheme::Scheme;
-use std::env;
-
 mod cli;
 mod fun;
 mod gen;
 mod scheme;
 mod show;
 mod var;
+
+use scheme::Scheme;
+use std::env;
 
 fn main() {
     let mut scheme = Scheme::init();
