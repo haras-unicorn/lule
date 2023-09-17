@@ -1,19 +1,26 @@
+// #![deny(
+//   unsafe_code,
+//   // reason = "Let's just not do it"
+// )]
+// #![deny(
+//   clippy::unwrap_used,
+//   clippy::expect_used,
+//   clippy::panic,
+//   // reason = "We have to handle errors properly"
+// )]
+
+#[macro_use]
+extern crate serde_derive;
+
+use scheme::Scheme;
+use std::env;
+
 mod cli;
 mod fun;
 mod gen;
 mod scheme;
 mod show;
 mod var;
-
-extern crate rayon;
-extern crate serde;
-extern crate serde_json;
-
-#[macro_use]
-extern crate serde_derive;
-
-use scheme::*;
-use std::env;
 
 fn main() {
     let mut scheme = Scheme::init();

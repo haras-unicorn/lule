@@ -1,6 +1,3 @@
-#![allow(dead_code)]
-
-extern crate getset;
 use getset::{CopyGetters, Getters, MutGetters, Setters};
 use std::collections::HashMap as Map;
 
@@ -54,63 +51,6 @@ impl Scheme {
             blend: None,
             mixes: None,
         }
-    }
-    pub fn modify(&mut self, new: &Scheme) -> &Self {
-        if let Some(value) = new.colors() {
-            self.colors = Some(value.clone());
-        }
-        if let Some(value) = new.pigments() {
-            self.pigments = Some(value.clone());
-        }
-        if let Some(value) = new.image() {
-            self.image = Some(value.clone());
-        }
-        if let Some(value) = new.scheme() {
-            self.scheme = Some(value.clone());
-        }
-        if let Some(value) = new.walldir() {
-            self.walldir = Some(value.clone());
-        }
-        if let Some(value) = new.config() {
-            self.config = Some(value.clone());
-        }
-        if let Some(value) = new.cache() {
-            self.cache = Some(value.clone());
-        }
-        if let Some(value) = new.scripts() {
-            self.scripts = Some(value.clone());
-        }
-        if let Some(value) = new.patterns() {
-            self.patterns = Some(value.clone());
-        }
-        if let Some(value) = new.theme() {
-            self.theme = Some(value.clone());
-        }
-        if let Some(value) = new.palette() {
-            self.palette = Some(value.clone());
-        }
-        if let Some(value) = new.sort() {
-            self.sort = Some(value.clone());
-        }
-        if let Some(value) = new.saturation() {
-            self.saturation = Some(*value);
-        }
-        if let Some(value) = new.illumination() {
-            self.illumination = Some(*value);
-        }
-        if let Some(value) = new.hue() {
-            self.hue = Some(*value);
-        }
-        if let Some(value) = new.difference() {
-            self.difference = Some(*value);
-        }
-        if let Some(value) = new.blend() {
-            self.blend = Some(*value);
-        }
-        if let Some(value) = new.mixes() {
-            self.mixes = Some(value.clone());
-        }
-        self
     }
 }
 

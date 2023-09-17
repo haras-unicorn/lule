@@ -166,7 +166,6 @@ pub fn show_color(
 
     canvas.draw_text(text_position_y, text_position_x, &format!("Color: {}", id));
 
-    #[allow(clippy::identity_op)]
     canvas.draw_text(
         text_position_y + 2,
         text_position_x,
