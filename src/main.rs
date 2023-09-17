@@ -20,8 +20,11 @@ fn main() {
     let mut scheme = Scheme::init();
 
     let show_logo = env::args().len() <= 1;
+    let current_exe_path = env::current_exe().unwrap();
+    let current_exe_dir = current_exe_path.parent().unwrap();
+    let logo_path = current_exe_dir.join("assets").join("logo.txt");
     let logo = if show_logo {
-        std::fs::read_to_string("resources/logo.txt").unwrap_or(String::new())
+        std::fs::read_to_string(logo_path).unwrap_or(String::new())
     } else {
         String::new()
     };

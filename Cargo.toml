@@ -30,3 +30,6 @@ futures = "0.3.28"
 templar = "0.5"
 fork = "0.1.22"
 nom = "5"
+
+[build-dependencies]
+fs_extra = "1.3.0"

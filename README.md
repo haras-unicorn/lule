@@ -1,5 +1,3 @@
-
-
 <img align="right" width="26%" src="./resources/LOGO.png">
 
 lule
