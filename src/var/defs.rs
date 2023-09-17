@@ -1,37 +1,20 @@
 use crate::scheme::*;
 use colored::*;
-use dirs;
-use std::path::PathBuf;
 
 pub fn concatinate(scheme: &mut Scheme) {
-    let _home_path: PathBuf = dirs::home_dir().unwrap_or_else(|| {
-        panic!(
-            "{} {}",
-            "error:".red().bold(),
-            "Path of home is impossible to get"
-        )
-    });
+    let project_dirs = directories::ProjectDirs::from("com", "Lule", "Lule")
+        .unwrap_or_else(|| panic!("{} {}", "error:".red().bold(), "Failed to get project dirs"));
 
-    let mut lule_configs: PathBuf = dirs::config_dir().unwrap_or_else(|| {
-        panic!(
-            "{} {}",
-            "error:".red().bold(),
-            "Path for configs is impossible to get"
-        )
-    });
-    lule_configs.push("lule");
-
-    let mut lule_cache: PathBuf = dirs::cache_dir().unwrap_or_else(|| {
-        panic!(
-            "{} {}",
-            "error:".red().bold(),
-            "Path for configs is impossible to get"
-        )
-    });
-    lule_cache.push("lule");
+    let cache_dir = project_dirs.cache_dir().to_path_buf();
+    let config_dir = project_dirs.config_dir().to_path_buf();
+    let config_path = {
+        let mut config_path = config_dir.clone();
+        config_path.push("lule");
+        config_path
+    };
 
     scheme.set_theme(Some("dark".to_string()));
-    scheme.set_config(Some(lule_configs.to_str().unwrap().to_string()));
-    scheme.set_cache(Some(lule_cache.to_str().unwrap().to_string()));
+    scheme.set_config(Some(config_path.into_os_string().into_string().unwrap()));
+    scheme.set_cache(Some(cache_dir.into_os_string().into_string().unwrap()));
     scheme.set_palette(Some("pigment".to_string()));
 }
