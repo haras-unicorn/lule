@@ -1,13 +1,13 @@
-// #![deny(
-//   unsafe_code,
-//   // reason = "Let's just not do it"
-// )]
-// #![deny(
-//   clippy::unwrap_used,
-//   clippy::expect_used,
-//   clippy::panic,
-//   // reason = "We have to handle errors properly"
-// )]
+#![deny(
+  unsafe_code,
+  // reason = "Let's just not do it"
+)]
+#![deny(
+  clippy::unwrap_used,
+  clippy::expect_used,
+  clippy::panic,
+  // reason = "We have to handle errors properly"
+)]
 
 mod cli;
 mod fun;
