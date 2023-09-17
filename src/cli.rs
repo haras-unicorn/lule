@@ -1,7 +1,6 @@
 pub mod colors;
 pub mod config;
 pub mod create;
-pub mod daemon;
 pub mod test;
 
 use clap::{
@@ -116,27 +115,6 @@ pub fn build_cli(logo: &str) -> App<'static, '_> {
                         .help("action to take")
                         .possible_values(&["set", "regen"])
                         .takes_value(true)
-                        .last(true),
-                ),
-        )
-        .subcommand(
-            SubCommand::with_name("daemon")
-                .about("Run as deamon process with looping wallpapers")
-                .arg(
-                    Arg::with_name("loop")
-                        .help("Loop time in seconds for new gneration")
-                        .long("loop")
-                        .takes_value(true)
-                        .default_value("300")
-                        .value_name("SECONDS")
-                        .set(ArgSettings::RequireEquals),
-                )
-                .arg(
-                    Arg::with_name("action")
-                        .help("action to take")
-                        .possible_values(&["start", "stop", "detach"])
-                        .takes_value(true)
-                        .required(true)
                         .last(true),
                 ),
         )

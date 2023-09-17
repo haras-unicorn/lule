@@ -1,6 +1,5 @@
 use crate::fun::text;
 use crate::scheme::*;
-use anyhow::{Context, Result};
 use serde_json::Value;
 use std::collections::HashMap as Map;
 use std::env;
@@ -95,10 +94,4 @@ pub fn output_to_json(scheme: &mut Scheme, map: bool) -> Value {
     } else {
         serde_json::to_value(vec_profile).unwrap()
     }
-}
-
-pub fn json_to_scheme(data: String) -> Result<Scheme> {
-    let scheme: Scheme =
-        serde_json::from_str(&data).context("something got fucked-up reaading json")?;
-    Ok(scheme)
 }

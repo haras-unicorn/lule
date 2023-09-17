@@ -36,7 +36,6 @@ fn main() {
             "colors" => cli::colors::run(&app, &mut scheme),
             "create" => cli::create::run(&app, &mut scheme),
             "config" => cli::config::run(&app, &mut scheme),
-            "daemon" => cli::daemon::run(&app, &mut scheme),
             "test" => cli::test::run(&app, &mut scheme),
             _ => Ok(()),
         }
