@@ -9,9 +9,6 @@
 //   // reason = "We have to handle errors properly"
 // )]
 
-#[macro_use]
-extern crate serde_derive;
-
 use scheme::Scheme;
 use std::env;
 

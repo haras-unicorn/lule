@@ -1,4 +1,5 @@
 use getset::{CopyGetters, Getters, MutGetters, Setters};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone, CopyGetters, Getters, MutGetters, Setters)]
